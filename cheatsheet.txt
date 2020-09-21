@@ -1,0 +1,45 @@
+activate denv
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py createsuperuser
+shank1
+s@s.com
+1234
+1234
+y
+python manage.py runserver
+
+
+
+python manage.py shell
+from model_app.models import Company,Employee,Profile,Todos
+from django.contrib.auth.models import User
+
+u1=User.objects.create(username="shank1234",password="1234")
+u1.save()
+
+Profile.objects.all()
+
+u1=User.objects.filter(username="shank").first()
+Todos.objects.create(name="hello",completed=True,user=u1) 
+
+
+//for new project
+activate denv
+python manage.py createsuperuser
+shank
+s@s.com
+1234
+1234
+y
+python manage.py runserver
+
+
+activate denv
+python manage.py makemigrations
+python manage.py migrate
+python manage.py collectstatic
+python manage.py runserver
+

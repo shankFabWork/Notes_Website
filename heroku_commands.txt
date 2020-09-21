@@ -1,0 +1,122 @@
+-----run as administrator-----
+conda create --name django_env
+pip install django psycopg2 gunicorn whitenoise django-crispy-forms pillow 
+
+activate django_env
+
+-----heroku signup-----
+-----then heroku login-----
+heroku login
+heroku create shank-poll-app
+
+pip install gunicorn
+-----make Procfile without any extension -----
+touch Procfile
+echo web:gunicorn django_project.wsgi --log-file - > Procfile 
+
+-----make runtime.txt-----
+touch runtime.txt
+echo python-3.8.1 > runtime.txt
+
+pip install django-heroku
+-----in "settings.py" file-----
+import django_heroku
+django_heroku.settings(locals())
+
+pip install whitenoise
+-----add it into "settings.py" (middleware section )-----
+'whitenoise.middleware.WhiteNoiseMiddleware',
+
+-----in "settings.py" file-----
+DEBUG = False
+ALLOWED_HOSTS = ["shank-poll-app.herokuapp.com","127.0.0.1"]
+
+-----Add "postgres" instead of "sqlite"
+pip install psycopg2
+DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "poll_app",
+            "USER": "postgres",
+            "PASSWORD": "1234",
+            "HOST": "127.0.0.1",
+            "PORT": "5432",
+        }
+}
+
+pip freeze > requirements.txt
+
+git init
+git add -A
+git status
+git commit -m "changes settings.py"
+
+heroku login
+
+git config --global user.email "shankfabulous@gmail.com"
+git config --global user.name "lassino1"
+
+--------------------------------------------------
+-----delete git file-----
+-----delete heroku project-----
+-----set it to work with python-----
+-----add this in "settings.py" file-----
+'whitenoise.middleware.WhiteNoiseMiddleware',
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+heroku login
+
+notes-app-with-registration
+
+git init
+heroku create notes-app-with-registration
+heroku git:remote -a notes-app-with-registration
+git add .
+git commit -m "content"
+git push heroku master
+heroku ps:scale web=1
+heroku open
+
+heroku run bash
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py createsuperuser
+
+
+
+
+
+
+
+
+
+git remote -v
+
+
+
+
+
+
+-----go to "Add buildpack" in the settings-----
+----- "deploy"
+
+git remote add origin https://github.com/shankFab/<repo_name>.git
+git push -u origin master
+
+-----Poll_App_with_charts-----
+git remote add origin https://github.com/shankFab/Poll_App_with_charts.git
+git push -u origin master
+
+python manage.py collectstatic
+
+
+activate denv
+activate django_env
+
+python manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver

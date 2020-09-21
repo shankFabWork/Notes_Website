@@ -1,0 +1,102 @@
+<!--Navbar -->
+
+
+
+{% url 'home' as home %}
+{% url 'login' as login %}
+{% url 'register' as register %}
+{% url 'update' as update %}
+
+{% url 'profile' as profile %}
+{% url 'logout' as logout %}
+
+{% url 'profile' as profile %}
+{% url 'update_post' as update_post %}
+{% url 'create_post' as create_post %}
+{% url 'all_post' as all_post %}
+{% url 'search_post' as search_post %}
+{% url 'global_post' as global_post %}
+
+
+
+
+<!--Navbar -->
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+  <a class="navbar-brand" href="#">
+    <i class="fab fa-asymmetrik fa-3x"></i>
+    &nbsp;&nbsp;&nbsp;
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+    aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+    <ul class="navbar-nav mr-auto">
+
+
+      {% if user.is_superuser %}
+      <li class="nav-item {% if request.path == global_post %} active {% endif %}">
+        <a class="nav-link" href="{% url 'global_post' %}">All Users
+        </a>
+      </li>
+      {% else %}
+      {% endif %}
+            
+      <li class="nav-item {% if request.path == home %} active {% endif %}">
+        <a class="nav-link" href="{% url 'home' %}">Home
+        </a>
+      </li>
+
+      <li class="nav-item {% if request.path == create_post %} active {% endif %}">
+        <a class="nav-link" href="{% url 'create_post' %}">Create Post
+        </a>
+      </li>
+      
+      <li class="nav-item {% if request.path == profile %} active {% endif %}">
+        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+      </li>
+
+      <li class="nav-item {% if request.path == logout %} active {% endif %}">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+
+      <li class="nav-item {% if request.path == update %} active {% endif %}">
+        <a class="nav-link" href="{% url 'update' %}">Update</a>
+      </li>
+
+      <li class="nav-item {% if request.path == all_post %} active {% endif %}">
+        <a class="nav-link" href="{% url 'all_post' %}">All Post</a>
+      </li>
+
+      <li class="nav-item {% if request.path == search_post %} active {% endif %}">
+        <a class="nav-link" href="{% url 'search_post' %}">Search Post</a>
+      </li>
+
+
+
+
+    </ul>
+    
+    <ul class="navbar-nav ml-auto nav-flex-icons">      
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link">Welcome {{user.username}}</a>
+            </li>
+            <li class="nav-item">
+              <img style='border-radius: 50%;width: 50px;height: 50px;' src='{{user.profile.front.url}}' />
+            </li>
+            
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" style="text-transform: uppercase" href="{% url 'register' %}">Register</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" style="text-transform: uppercase" href="{% url 'login' %}">Login</a>
+            </li>
+          {% endif %}
+    </ul>
+
+  </div>
+</nav>
+<!--/.Navbar -->

@@ -1,0 +1,44 @@
+{% extends '../base.html' %}
+{% load static  %}
+{% load crispy_forms_tags  %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/ProfileList.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    {{data}}
+
+    <div class="container">
+    	<div class="row">
+    
+      {% for i in arr %}
+
+    		<!--Profile Card 3-->
+    		<div class="col-md-4">
+          <div class="card profile-card-3">
+              <div class="background-block">
+                  <img src="{{i.profile.back.url}}" alt="profile-sample1" class="background"/>
+              </div>
+              <div class="profile-thumb-block">
+                  <img src="{{i.profile.front.url}}" alt="profile-image" class="profile"/>
+              </div>
+              <div class="card-content">
+                  <h2>{{i.username}}</h2>
+                  <h3>{{i.profile.about}}</h3>
+                  <br />
+                  <h6>{{i.profile.desc|truncatechars:120}}</h6>
+                  </div>
+              </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+    
+    {% endblock %}
+
+    {% block foot %}
+    {% endblock%}
+    

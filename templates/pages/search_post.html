@@ -1,0 +1,50 @@
+{% extends '../base.html' %}
+{% load static  %}
+{% load crispy_forms_tags  %}
+
+{% block content %}
+
+<form 
+  class="form-inline md-form mr-auto mb-4" 
+  action="{% url 'search_post' %}"
+  method="get"
+>
+  <input name='search' class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+  <button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit">Search</button>
+</form>
+
+
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Date Created</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in arr %}
+        <tr>
+            <td>{{i.title}}</td>
+            <td>{{i.date_created}}</td>
+        <td>
+
+        <a href="{% url 'update_post' i.id %}" class="btn text-secondary px-0">
+        <i class="far fa-edit fa-lg"></i>
+        UPDATE
+        </a>
+        <td>
+          <a href="{% url 'delete_post' i.id  %}">Delete</a>
+        </td>
+        
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+    
+{% endblock %}
